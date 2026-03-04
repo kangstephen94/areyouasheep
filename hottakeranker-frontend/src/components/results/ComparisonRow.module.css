@@ -1,0 +1,55 @@
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 var(--space-xs);
+}
+
+.header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  letter-spacing: 0.5px;
+  text-align: left;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.row {
+  background: var(--color-bg-card);
+  border: 1px solid #ece7e1;
+}
+
+.row td {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.row td:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.row td:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.rank {
+  font-weight: 700;
+  color: var(--color-brand);
+  width: 32px;
+  text-align: center;
+}
+
+.option {
+  font-weight: 500;
+}
+
+.emoji {
+  text-align: center;
+  font-size: 1.2rem;
+  width: 36px;
+}
+
+.crowdRank {
+  color: var(--color-text-muted);
+  width: 32px;
+  text-align: center;
+}

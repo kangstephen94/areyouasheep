@@ -1,0 +1,86 @@
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 var(--space-xs);
+}
+
+.table th {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-dim);
+  text-align: left;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.table th:first-child,
+.table td.rank {
+  text-align: center;
+  width: 48px;
+}
+
+.row {
+  background: var(--color-bg-card);
+  transition: background var(--transition-fast);
+}
+
+.row:hover {
+  background: var(--color-bg-hover);
+}
+
+.row td {
+  padding: var(--space-sm) var(--space-md);
+  vertical-align: middle;
+  border-top: 1px solid #ece7e1;
+  border-bottom: 1px solid #ece7e1;
+}
+
+.row td:first-child {
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  border-left: 1px solid #ece7e1;
+}
+
+.row td:last-child {
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-right: 1px solid #ece7e1;
+}
+
+.rank {
+  font-weight: 800;
+  color: var(--color-brand);
+  font-size: 0.9rem;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.elo {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.votes {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--color-text-dim);
+}
+
+.total {
+  text-align: center;
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+  margin-top: var(--space-md);
+}

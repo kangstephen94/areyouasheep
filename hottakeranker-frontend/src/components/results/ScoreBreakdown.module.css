@@ -1,0 +1,56 @@
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.label {
+  width: 120px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barBg {
+  flex: 1;
+  height: 20px;
+  background: var(--color-bg-hover);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--gradient-brand);
+  border-radius: var(--radius-sm);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.row:nth-child(1) .barFill { animation: barGrow 0.5s ease both; animation-delay: 0s; }
+.row:nth-child(2) .barFill { animation: barGrow 0.5s ease both; animation-delay: 0.1s; }
+.row:nth-child(3) .barFill { animation: barGrow 0.5s ease both; animation-delay: 0.2s; }
+.row:nth-child(4) .barFill { animation: barGrow 0.5s ease both; animation-delay: 0.3s; }
+.row:nth-child(5) .barFill { animation: barGrow 0.5s ease both; animation-delay: 0.4s; }
+.row:nth-child(6) .barFill { animation: barGrow 0.5s ease both; animation-delay: 0.5s; }
+
+@keyframes barGrow {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+.value {
+  width: 48px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-align: right;
+}

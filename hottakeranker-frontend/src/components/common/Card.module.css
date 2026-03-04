@@ -1,0 +1,14 @@
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 1px solid #ece7e1;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}

@@ -1,0 +1,27 @@
+import { compareRankings, matchPercentage, emojiBar } from './ranking';
+
+export function generateShareText(
+  question: string,
+  userRanking: string[],
+  crowdRanking: string[]
+): string {
+  const comparison = compareRankings(userRanking, crowdRanking);
+  const pct = matchPercentage(userRanking, crowdRanking);
+  const bar = emojiBar(comparison);
+
+  return [
+    `Hot Take Ranker`,
+    `"${question}"`,
+    `${bar} ${pct}% match`,
+    `hottakeranker.com`,
+  ].join('\n');
+}
+
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
+  }
+}

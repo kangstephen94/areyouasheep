@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude config:*)",
+      "Bash(tail:*)",
+      "Bash(PGPASSWORD=ilovetina123 psql:*)",
+      "Bash(psql:*)",
+      "Bash(grep:*)",
+      "Bash(./gradlew test:*)",
+      "Bash(curl:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(./gradlew dependencies:*)",
+      "Bash(xargs -I{} jar tf {})"
+    ]
+  }
+}

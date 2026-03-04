@@ -1,0 +1,30 @@
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: var(--color-bg-card);
+  border: 2px solid #ece7e1;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 64px;
+  word-break: break-word;
+}
+
+.tile:hover {
+  border-color: var(--color-brand);
+  background: var(--color-brand-bg);
+  animation: wiggle 0.35s ease;
+}
+
+.tile.picked {
+  opacity: 0.35;
+  pointer-events: none;
+  transform: scale(0.95);
+  background: var(--color-bg-hover);
+  border-color: transparent;
+}
