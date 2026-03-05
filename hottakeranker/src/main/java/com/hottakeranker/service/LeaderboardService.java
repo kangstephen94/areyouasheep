@@ -10,7 +10,10 @@ import com.hottakeranker.entity.User;
 import com.hottakeranker.enums.AgeGroup;
 import com.hottakeranker.enums.Ethnicity;
 import com.hottakeranker.enums.Gender;
+import com.hottakeranker.enums.PoliticalView;
 import com.hottakeranker.enums.Region;
+import com.hottakeranker.enums.RelationshipStatus;
+import com.hottakeranker.enums.ReligiousView;
 import com.hottakeranker.repository.EloHistoryRepository;
 import com.hottakeranker.repository.TopicRepository;
 import com.hottakeranker.repository.UserRepository;
@@ -37,20 +40,28 @@ public class LeaderboardService {
 		this.topicRepository = topicRepository;
 	}
 
-	@Cacheable(value = "leaderboard", key = "#region + '-' + #gender + '-' + #ageGroup + '-' + #ethnicity")
-	public LeaderboardResponse getLeaderboard(Region region, Gender gender, AgeGroup ageGroup, Ethnicity ethnicity) {
-		List<User> users;
+	@Cacheable(value = "leaderboard", key = "#region + '-' + #gender + '-' + #ageGroup + '-' + #ethnicity + '-' + #religiousView + '-' + #politicalView + '-' + #relationshipStatus")
+	public LeaderboardResponse getLeaderboard(Region region, Gender gender, AgeGroup ageGroup, Ethnicity ethnicity,
+			ReligiousView religiousView, PoliticalView politicalView, RelationshipStatus relationshipStatus) {
+		boolean hasFilters = region != null || gender != null || ageGroup != null || ethnicity != null
+				|| religiousView != null || politicalView != null || relationshipStatus != null;
 
-		if (region != null) {
-			users = userRepository.findTop50ByRegionOrderByEloRatingDesc(region);
-		} else if (gender != null) {
-			users = userRepository.findTop50ByGenderOrderByEloRatingDesc(gender);
-		} else if (ageGroup != null) {
-			users = userRepository.findTop50ByAgeGroupOrderByEloRatingDesc(ageGroup);
-		} else if (ethnicity != null) {
-			users = userRepository.findTop50ByEthnicityOrderByEloRatingDesc(ethnicity);
-		} else {
+		List<User> users;
+		if (!hasFilters) {
 			users = userRepository.findTop50ByOrderByEloRatingDesc();
+		} else {
+			users = userRepository.findAll(org.springframework.data.domain.Sort.by(
+					org.springframework.data.domain.Sort.Direction.DESC, "eloRating"))
+				.stream()
+				.filter(u -> region == null || u.getRegion() == region)
+				.filter(u -> gender == null || u.getGender() == gender)
+				.filter(u -> ageGroup == null || u.getAgeGroup() == ageGroup)
+				.filter(u -> ethnicity == null || u.getEthnicity() == ethnicity)
+				.filter(u -> religiousView == null || u.getReligiousView() == religiousView)
+				.filter(u -> politicalView == null || u.getPoliticalView() == politicalView)
+				.filter(u -> relationshipStatus == null || u.getRelationshipStatus() == relationshipStatus)
+				.limit(50)
+				.toList();
 		}
 
 		List<LeaderboardEntryDto> entries = new ArrayList<>();

@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import RankPage from './pages/RankPage';
 import ResultsPage from './pages/ResultsPage';
+import ControversialPage from './pages/ControversialPage';
 import LeaderboardPage from './pages/LeaderboardPage';
 import SuggestPage from './pages/SuggestPage';
 import ProfilePage from './pages/ProfilePage';
@@ -29,6 +30,7 @@ export default function App() {
             }
           />
           <Route path="/topic/:id/results" element={<ResultsPage />} />
+          <Route path="/controversial" element={<ControversialPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route
             path="/suggest"

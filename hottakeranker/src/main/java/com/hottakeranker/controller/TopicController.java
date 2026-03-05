@@ -1,5 +1,6 @@
 package com.hottakeranker.controller;
 
+import com.hottakeranker.dto.ControversialTopicDto;
 import com.hottakeranker.dto.DemographicFilterRequest;
 import com.hottakeranker.dto.TopicResultResponse;
 import com.hottakeranker.dto.TopicSuggestionRequest;
@@ -8,9 +9,13 @@ import com.hottakeranker.entity.TopicSuggestion;
 import com.hottakeranker.enums.AgeGroup;
 import com.hottakeranker.enums.Ethnicity;
 import com.hottakeranker.enums.Gender;
+import com.hottakeranker.enums.PoliticalView;
 import com.hottakeranker.enums.Region;
+import com.hottakeranker.enums.RelationshipStatus;
+import com.hottakeranker.enums.ReligiousView;
 import com.hottakeranker.enums.TopicStatus;
 import com.hottakeranker.repository.TopicRepository;
+import com.hottakeranker.service.ControversyService;
 import com.hottakeranker.service.DemographicService;
 import com.hottakeranker.service.RankingAggregationService;
 import com.hottakeranker.service.TopicSuggestionService;
@@ -36,19 +41,27 @@ public class TopicController {
 	private final RankingAggregationService rankingService;
 	private final DemographicService demographicService;
 	private final TopicSuggestionService suggestionService;
+	private final ControversyService controversyService;
 
 	public TopicController(TopicRepository topicRepository, RankingAggregationService rankingService,
-						   DemographicService demographicService, TopicSuggestionService suggestionService) {
+						   DemographicService demographicService, TopicSuggestionService suggestionService,
+						   ControversyService controversyService) {
 		this.topicRepository = topicRepository;
 		this.rankingService = rankingService;
 		this.demographicService = demographicService;
 		this.suggestionService = suggestionService;
+		this.controversyService = controversyService;
 	}
 
 	@GetMapping
 	public ResponseEntity<List<Topic>> getActiveTopics() {
 		List<Topic> topics = topicRepository.findByStatus(TopicStatus.ACTIVE);
 		return ResponseEntity.ok(topics);
+	}
+
+	@GetMapping("/controversial")
+	public ResponseEntity<List<ControversialTopicDto>> getControversialTopics() {
+		return ResponseEntity.ok(controversyService.getControversialTopics());
 	}
 
 	@GetMapping("/{id}/results")
@@ -63,13 +76,19 @@ public class TopicController {
 			@RequestParam(required = false) Gender gender,
 			@RequestParam(required = false) AgeGroup ageGroup,
 			@RequestParam(required = false) Region region,
-			@RequestParam(required = false) Ethnicity ethnicity) {
+			@RequestParam(required = false) Ethnicity ethnicity,
+			@RequestParam(required = false) ReligiousView religiousView,
+			@RequestParam(required = false) PoliticalView politicalView,
+			@RequestParam(required = false) RelationshipStatus relationshipStatus) {
 
 		DemographicFilterRequest filter = new DemographicFilterRequest();
 		filter.setGender(gender);
 		filter.setAgeGroup(ageGroup);
 		filter.setRegion(region);
 		filter.setEthnicity(ethnicity);
+		filter.setReligiousView(religiousView);
+		filter.setPoliticalView(politicalView);
+		filter.setRelationshipStatus(relationshipStatus);
 
 		TopicResultResponse results = demographicService.getFilteredResults(id, filter);
 		return ResponseEntity.ok(results);

@@ -45,6 +45,9 @@ public class AuthController {
 			request.getRegion(),
 			request.getEthnicity()
 		);
+		user.setReligiousView(request.getReligiousView());
+		user.setPoliticalView(request.getPoliticalView());
+		user.setRelationshipStatus(request.getRelationshipStatus());
 
 		userRepository.save(user);
 

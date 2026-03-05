@@ -17,6 +17,13 @@ export default function Navbar() {
         Home
       </NavLink>
 
+      <NavLink to="/controversial" className={linkClass}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+        Hot
+      </NavLink>
+
       <NavLink to="/leaderboard" className={linkClass}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="20" x2="18" y2="10" />

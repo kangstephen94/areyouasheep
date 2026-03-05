@@ -1,4 +1,4 @@
-import { Gender, AgeGroup, Region, Ethnicity, TopicStatus, SuggestionStatus } from './enums';
+import { Gender, AgeGroup, Region, Ethnicity, ReligiousView, PoliticalView, RelationshipStatus, TopicStatus, SuggestionStatus } from './enums';
 
 // Auth
 export interface LoginRequest {
@@ -18,6 +18,9 @@ export interface RegisterRequest {
   ageGroup: AgeGroup;
   region: Region;
   ethnicity: Ethnicity;
+  religiousView?: ReligiousView;
+  politicalView?: PoliticalView;
+  relationshipStatus?: RelationshipStatus;
 }
 
 export interface RegisterResponse {
@@ -52,11 +55,23 @@ export interface TopicResultResponse {
   scores: Record<string, number>;
 }
 
+export interface ControversialTopicDto {
+  topicId: number;
+  question: string;
+  category: string;
+  options: string[];
+  totalVotes: number;
+  controversyScore: number;
+}
+
 export interface DemographicFilter {
   gender?: Gender;
   ageGroup?: AgeGroup;
   region?: Region;
   ethnicity?: Ethnicity;
+  religiousView?: ReligiousView;
+  politicalView?: PoliticalView;
+  relationshipStatus?: RelationshipStatus;
 }
 
 // Leaderboard

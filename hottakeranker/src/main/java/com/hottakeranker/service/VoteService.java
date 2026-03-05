@@ -30,7 +30,8 @@ public class VoteService {
 
 	@Caching(evict = {
 		@CacheEvict(value = "results", key = "#request.topicId"),
-		@CacheEvict(value = "demographics", allEntries = true)
+		@CacheEvict(value = "demographics", allEntries = true),
+		@CacheEvict(value = "controversial", allEntries = true)
 	})
 	public void submitVote(VoteRequest request) {
 		if (!userRepository.existsById(request.getUserId())) {

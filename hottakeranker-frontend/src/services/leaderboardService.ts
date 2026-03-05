@@ -7,6 +7,9 @@ export async function getLeaderboard(filter?: DemographicFilter): Promise<Leader
   if (filter?.ageGroup) params.set('ageGroup', filter.ageGroup);
   if (filter?.region) params.set('region', filter.region);
   if (filter?.ethnicity) params.set('ethnicity', filter.ethnicity);
+  if (filter?.religiousView) params.set('religiousView', filter.religiousView);
+  if (filter?.politicalView) params.set('politicalView', filter.politicalView);
+  if (filter?.relationshipStatus) params.set('relationshipStatus', filter.relationshipStatus);
   const query = params.toString();
   const res = await api.get<LeaderboardResponse>(`/leaderboard${query ? `?${query}` : ''}`);
   return res.data;

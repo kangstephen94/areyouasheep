@@ -3,7 +3,10 @@ package com.hottakeranker.entity;
 import com.hottakeranker.enums.AgeGroup;
 import com.hottakeranker.enums.Ethnicity;
 import com.hottakeranker.enums.Gender;
+import com.hottakeranker.enums.PoliticalView;
 import com.hottakeranker.enums.Region;
+import com.hottakeranker.enums.RelationshipStatus;
+import com.hottakeranker.enums.ReligiousView;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,6 +61,15 @@ public class User {
 
 	@Enumerated(EnumType.STRING)
 	private Ethnicity ethnicity;
+
+	@Enumerated(EnumType.STRING)
+	private ReligiousView religiousView;
+
+	@Enumerated(EnumType.STRING)
+	private PoliticalView politicalView;
+
+	@Enumerated(EnumType.STRING)
+	private RelationshipStatus relationshipStatus;
 
 	private int eloRating = 1000;
 

@@ -31,7 +31,7 @@ public class DemographicService {
 		this.rankingAggregationService = rankingAggregationService;
 	}
 
-	@Cacheable(value = "demographics", key = "#topicId + '-' + #filter.gender + '-' + #filter.ageGroup + '-' + #filter.region + '-' + #filter.ethnicity")
+	@Cacheable(value = "demographics", key = "#topicId + '-' + #filter.gender + '-' + #filter.ageGroup + '-' + #filter.region + '-' + #filter.ethnicity + '-' + #filter.religiousView + '-' + #filter.politicalView + '-' + #filter.relationshipStatus")
 	public TopicResultResponse getFilteredResults(Long topicId, DemographicFilterRequest filter) {
 		Topic topic = topicRepository.findById(topicId)
 			.orElseThrow(() -> new RuntimeException("Topic not found"));
@@ -73,6 +73,15 @@ public class DemographicService {
 			return false;
 		}
 		if (filter.getEthnicity() != null && user.getEthnicity() != filter.getEthnicity()) {
+			return false;
+		}
+		if (filter.getReligiousView() != null && user.getReligiousView() != filter.getReligiousView()) {
+			return false;
+		}
+		if (filter.getPoliticalView() != null && user.getPoliticalView() != filter.getPoliticalView()) {
+			return false;
+		}
+		if (filter.getRelationshipStatus() != null && user.getRelationshipStatus() != filter.getRelationshipStatus()) {
 			return false;
 		}
 		return true;

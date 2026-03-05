@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PageShell from '../components/layout/PageShell';
 import MatchScore from '../components/results/MatchScore';
+import NpcBadge from '../components/results/NpcBadge';
 import ComparisonTable from '../components/results/ComparisonRow';
 import ScoreBreakdown from '../components/results/ScoreBreakdown';
 import FilterBar from '../components/common/FilterBar';
@@ -11,7 +12,11 @@ import ErrorBanner from '../components/common/ErrorBanner';
 import { getResults, getDemographicResults } from '../services/topicService';
 import { compareRankings, matchPercentage, emojiBar } from '../utils/ranking';
 import { generateShareText, copyToClipboard } from '../utils/share';
-import { Gender, AgeGroup, Region, Ethnicity, GENDER_LABELS, AGE_GROUP_LABELS, REGION_LABELS, ETHNICITY_LABELS } from '../types/enums';
+import {
+  Gender, AgeGroup, Region, Ethnicity, ReligiousView, PoliticalView, RelationshipStatus,
+  GENDER_LABELS, AGE_GROUP_LABELS, REGION_LABELS, ETHNICITY_LABELS,
+  RELIGIOUS_VIEW_LABELS, POLITICAL_VIEW_LABELS, RELATIONSHIP_STATUS_LABELS,
+} from '../types/enums';
 import type { TopicResultResponse, DemographicFilter } from '../types/api';
 import styles from './ResultsPage.module.css';
 
@@ -30,7 +35,8 @@ export default function ResultsPage() {
 
   useEffect(() => {
     setLoading(true);
-    const hasFilter = filter.gender || filter.ageGroup || filter.region || filter.ethnicity;
+    const hasFilter = filter.gender || filter.ageGroup || filter.region || filter.ethnicity
+      || filter.religiousView || filter.politicalView || filter.relationshipStatus;
     const promise = hasFilter
       ? getDemographicResults(topicId, filter)
       : getResults(topicId);
@@ -80,7 +86,10 @@ export default function ResultsPage() {
         </div>
 
         {pct !== null && comparison && (
-          <MatchScore percentage={pct} emojis={emojis} />
+          <>
+            <MatchScore percentage={pct} emojis={emojis} />
+            <NpcBadge matchPercentage={pct} />
+          </>
         )}
 
         {comparisonItems && (
@@ -120,6 +129,24 @@ export default function ResultsPage() {
             options={Object.entries(ETHNICITY_LABELS).map(([v, l]) => ({ value: v, label: l }))}
             selected={filter.ethnicity ?? null}
             onSelect={(v) => setFilter((f) => ({ ...f, ethnicity: v as Ethnicity | undefined ?? undefined }))}
+          />
+          <span className={styles.filterLabel}>Religion</span>
+          <FilterBar
+            options={Object.entries(RELIGIOUS_VIEW_LABELS).map(([v, l]) => ({ value: v, label: l }))}
+            selected={filter.religiousView ?? null}
+            onSelect={(v) => setFilter((f) => ({ ...f, religiousView: v as ReligiousView | undefined ?? undefined }))}
+          />
+          <span className={styles.filterLabel}>Politics</span>
+          <FilterBar
+            options={Object.entries(POLITICAL_VIEW_LABELS).map(([v, l]) => ({ value: v, label: l }))}
+            selected={filter.politicalView ?? null}
+            onSelect={(v) => setFilter((f) => ({ ...f, politicalView: v as PoliticalView | undefined ?? undefined }))}
+          />
+          <span className={styles.filterLabel}>Relationship</span>
+          <FilterBar
+            options={Object.entries(RELATIONSHIP_STATUS_LABELS).map(([v, l]) => ({ value: v, label: l }))}
+            selected={filter.relationshipStatus ?? null}
+            onSelect={(v) => setFilter((f) => ({ ...f, relationshipStatus: v as RelationshipStatus | undefined ?? undefined }))}
           />
         </div>
 

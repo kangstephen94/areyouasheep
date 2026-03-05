@@ -32,8 +32,19 @@ variable "repo_url" {
   type        = string
 }
 
+variable "domain" {
+  description = "Domain name for the app (e.g. hottakeranker.com)"
+  type        = string
+}
+
 variable "allowed_ssh_cidr" {
   description = "CIDR block allowed to SSH into the instance"
   type        = string
   default     = "0.0.0.0/0"
+}
+
+variable "db_instance_class" {
+  description = "RDS instance class"
+  type        = string
+  default     = "db.t4g.micro"
 }

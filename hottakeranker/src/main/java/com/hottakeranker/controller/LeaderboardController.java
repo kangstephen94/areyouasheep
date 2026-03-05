@@ -6,7 +6,10 @@ import com.hottakeranker.dto.VoteHistoryDto;
 import com.hottakeranker.enums.AgeGroup;
 import com.hottakeranker.enums.Ethnicity;
 import com.hottakeranker.enums.Gender;
+import com.hottakeranker.enums.PoliticalView;
 import com.hottakeranker.enums.Region;
+import com.hottakeranker.enums.RelationshipStatus;
+import com.hottakeranker.enums.ReligiousView;
 import com.hottakeranker.service.LeaderboardService;
 import com.hottakeranker.service.VoteService;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +39,12 @@ public class LeaderboardController {
 			@RequestParam(required = false) Region region,
 			@RequestParam(required = false) Gender gender,
 			@RequestParam(required = false) AgeGroup ageGroup,
-			@RequestParam(required = false) Ethnicity ethnicity) {
-		LeaderboardResponse response = leaderboardService.getLeaderboard(region, gender, ageGroup, ethnicity);
+			@RequestParam(required = false) Ethnicity ethnicity,
+			@RequestParam(required = false) ReligiousView religiousView,
+			@RequestParam(required = false) PoliticalView politicalView,
+			@RequestParam(required = false) RelationshipStatus relationshipStatus) {
+		LeaderboardResponse response = leaderboardService.getLeaderboard(region, gender, ageGroup, ethnicity,
+				religiousView, politicalView, relationshipStatus);
 		return ResponseEntity.ok(response);
 	}
 

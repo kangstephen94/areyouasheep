@@ -7,6 +7,7 @@ import com.hottakeranker.enums.TopicStatus;
 import com.hottakeranker.repository.TopicRepository;
 import com.hottakeranker.security.JwtAuthFilter;
 import com.hottakeranker.security.JwtTokenProvider;
+import com.hottakeranker.service.ControversyService;
 import com.hottakeranker.service.DemographicService;
 import com.hottakeranker.service.RankingAggregationService;
 import com.hottakeranker.service.TopicSuggestionService;
@@ -47,6 +48,9 @@ class TopicControllerTest {
 
 	@MockitoBean
 	private TopicSuggestionService suggestionService;
+
+	@MockitoBean
+	private ControversyService controversyService;
 
 	@MockitoBean
 	private JwtTokenProvider jwtTokenProvider;

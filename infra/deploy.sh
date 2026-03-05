@@ -28,7 +28,7 @@ cd /opt/app
 git pull
 
 cd hottakeranker
-sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --no-deps redis backend frontend
 REMOTE
 
 echo ""

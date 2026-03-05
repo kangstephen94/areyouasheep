@@ -31,6 +31,13 @@
   --color-platinum: #00bcd4;
   --color-diamond: #e040fb;
 
+  /* NPC tier colors */
+  --color-npc: #9e9e9e;
+  --color-normie: #42a5f5;
+  --color-freethinker: #66bb6a;
+  --color-contrarian: #ff9800;
+  --color-unhinged: #e040fb;
+
   /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;

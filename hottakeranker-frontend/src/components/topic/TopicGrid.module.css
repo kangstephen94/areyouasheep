@@ -16,10 +16,17 @@
 .grid > *:nth-child(6) { animation-delay: 0.30s; }
 .grid > *:nth-child(7) { animation-delay: 0.36s; }
 .grid > *:nth-child(8) { animation-delay: 0.42s; }
+.grid > *:nth-child(9) { animation-delay: 0.48s; }
 
 @media (min-width: 520px) {
   .grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 

@@ -1,0 +1,70 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+  background: var(--gradient-brand);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+.controversyBadge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-error);
+  background: rgba(239, 83, 80, 0.1);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+.question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-text-dim);
+  font-size: 0.8rem;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.optionChip {
+  background: var(--color-brand-bg);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: var(--color-brand-dark);
+  font-weight: 500;
+}
+
+.moreChip {
+  background: var(--color-bg-hover);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
