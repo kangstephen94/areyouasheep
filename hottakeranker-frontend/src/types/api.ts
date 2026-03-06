@@ -109,6 +109,14 @@ export interface VoteHistoryEntry {
   votedAt: string;
 }
 
+// Admin
+export interface AdminTopicRequest {
+  question: string;
+  category: string;
+  options: string[];
+  status: TopicStatus;
+}
+
 // Suggestions
 export interface TopicSuggestionRequest {
   question: string;

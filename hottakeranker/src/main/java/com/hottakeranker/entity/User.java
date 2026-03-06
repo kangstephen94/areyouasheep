@@ -75,6 +75,8 @@ public class User {
 
 	private int streak = 0;
 
+	private boolean admin = false;
+
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 }

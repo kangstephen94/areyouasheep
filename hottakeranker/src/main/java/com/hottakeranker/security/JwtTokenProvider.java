@@ -21,12 +21,13 @@ public class JwtTokenProvider {
 		return Keys.hmacShaKeyFor(secret.getBytes());
 	}
 
-	public String generateToken(Long userId) {
+	public String generateToken(Long userId, boolean admin) {
 		Date now = new Date();
 		Date expiry = new Date(now.getTime() + expirationMs);
 
 		return Jwts.builder()
 				.subject(userId.toString())
+				.claim("admin", admin)
 				.issuedAt(now)
 				.expiration(expiry)
 				.signWith(getSigningKey())
@@ -41,6 +42,16 @@ public class JwtTokenProvider {
 				.getPayload()
 				.getSubject();
 		return Long.parseLong(subject);
+	}
+
+	public boolean isAdminFromToken(String token) {
+		Boolean admin = Jwts.parser()
+				.verifyWith(getSigningKey())
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.get("admin", Boolean.class);
+		return Boolean.TRUE.equals(admin);
 	}
 
 	public boolean validateToken(String token) {

@@ -105,7 +105,7 @@ class AuthControllerTest {
 
 		when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
 		when(passwordEncoder.matches("password123", "hashedpw")).thenReturn(true);
-		when(jwtTokenProvider.generateToken(1L)).thenReturn("jwt-token-123");
+		when(jwtTokenProvider.generateToken(1L, false)).thenReturn("jwt-token-123");
 
 		Map<String, String> request = Map.of(
 				"email", "test@example.com",

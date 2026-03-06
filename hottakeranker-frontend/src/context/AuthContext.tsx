@@ -6,6 +6,7 @@ import type { LoginRequest, RegisterRequest } from '../types/api';
 export interface AuthUser {
   id: number;
   displayName: string;
+  isAdmin: boolean;
 }
 
 export interface AuthContextType {
@@ -18,7 +19,7 @@ export interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-function parseJwtPayload(token: string): { sub: string; exp: number } {
+function parseJwtPayload(token: string): { sub: string; exp: number; admin?: boolean } {
   const base64 = token.split('.')[1];
   const json = atob(base64.replace(/-/g, '+').replace(/_/g, '/'));
   return JSON.parse(json);
@@ -32,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const payload = parseJwtPayload(token);
         if (payload.exp * 1000 > Date.now()) {
-          return { id: Number(payload.sub), displayName: sessionStorage.getItem('htr_name') ?? 'User' };
+          return { id: Number(payload.sub), displayName: sessionStorage.getItem('htr_name') ?? 'User', isAdmin: !!payload.admin };
         }
       } catch {
         // Token invalid, clear it
@@ -59,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAccessToken(res.token);
     const name = data.email.split('@')[0];
     sessionStorage.setItem('htr_name', name);
-    setUser({ id: Number(payload.sub), displayName: name });
+    setUser({ id: Number(payload.sub), displayName: name, isAdmin: !!payload.admin });
   }, []);
 
   const register = useCallback(async (data: RegisterRequest) => {
@@ -67,7 +68,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const loginRes = await authService.login({ email: data.email, password: data.password });
     setAccessToken(loginRes.token);
     sessionStorage.setItem('htr_name', registerRes.displayName);
-    setUser({ id: registerRes.id, displayName: registerRes.displayName });
+    const payload = parseJwtPayload(loginRes.token);
+    setUser({ id: registerRes.id, displayName: registerRes.displayName, isAdmin: !!payload.admin });
   }, []);
 
   const logout = useCallback(() => {
