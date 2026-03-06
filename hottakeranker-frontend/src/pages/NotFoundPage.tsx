@@ -10,7 +10,7 @@ export default function NotFoundPage() {
           This page doesn't exist
         </p>
         <Link to="/" style={{ fontWeight: 600 }}>
-          Back to Hot Takes
+          Back to NPC Detector
         </Link>
       </div>
     </PageShell>

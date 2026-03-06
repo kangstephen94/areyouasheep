@@ -1,4 +1,4 @@
-terraform {
+Oterraform {
   required_version = ">= 1.5"
 
   required_providers {
@@ -52,14 +52,6 @@ resource "aws_security_group" "app" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    description = "HTTPS"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -90,7 +82,6 @@ resource "aws_instance" "app" {
     db_url      = "jdbc:postgresql://${aws_db_instance.postgres.endpoint}/hottakeranker"
     jwt_secret  = var.jwt_secret
     repo_url    = var.repo_url
-    domain      = var.domain
   })
 
   depends_on = [aws_db_instance.postgres]

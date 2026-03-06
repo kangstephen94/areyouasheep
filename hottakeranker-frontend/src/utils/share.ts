@@ -12,7 +12,7 @@ export function generateShareText(
   const tier = getNpcTier(pct);
 
   return [
-    `Hot Take Ranker`,
+    `NPC Detector`,
     `"${question}"`,
     `${bar} ${pct}% match`,
     `${NPC_TIER_EMOJIS[tier]} ${NPC_TIER_LABELS[tier]}`,

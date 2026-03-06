@@ -61,7 +61,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.wide}>
-      <PageShell title="Hot Takes">
+      <PageShell title="NPC Detector">
         <ErrorBanner message={error} />
         {loading ? (
           <Spinner />

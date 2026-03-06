@@ -33,6 +33,6 @@ REMOTE
 
 echo ""
 echo "=== Redeploy complete! ==="
-echo "App URL: http://$IP"
+echo "App URL: https://npcdetector.com"
 echo "SSH:     ssh -i $KEY_FILE ec2-user@$IP"
 echo "Logs:    ssh -i $KEY_FILE ec2-user@$IP 'cd /opt/app/hottakeranker && sudo docker compose logs -f'"
