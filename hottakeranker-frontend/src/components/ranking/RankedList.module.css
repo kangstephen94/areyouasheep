@@ -4,6 +4,8 @@
   gap: var(--space-sm);
   margin-bottom: var(--space-lg);
   min-height: 48px;
+  max-height: 280px;
+  overflow-y: auto;
 }
 
 .item {

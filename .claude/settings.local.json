@@ -10,7 +10,8 @@
       "Bash(aws iam:*)",
       "Bash(terraform fmt:*)",
       "Bash(./gradlew test:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(psql:*)"
     ]
   }
 }
