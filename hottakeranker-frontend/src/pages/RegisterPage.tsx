@@ -49,7 +49,7 @@ export default function RegisterPage() {
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.heading}>
-          Join <span className={styles.brand}>Hot Take</span> Ranker
+          Join <span className={styles.brand}>NPC</span> Detector
         </h1>
         <ErrorBanner message={error} />
 
